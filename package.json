@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "init": "node ./scripts/generateData.js",
-    "start": "source .env && nodemon index --exec \"node -r @babel/register\"",
-    "test": "mocha --watch --watch-files **/*.js,tests/*.js --exit --require @babel/polyfill --require @babel/register tests/"
+    "start": "source ./.env && nodemon index --exec \"node -r @babel/register\"",
+    "test": "mocha --watch --watch-files **/*spec.js --exit --require @babel/polyfill --require @babel/register tests/"
   },
   "author": "Satya van Heummen",
   "license": "MIT",

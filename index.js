@@ -1,17 +1,19 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import footprintApi from './footprintApi'
+import { countriesEmissionWorkflow } from "./workflows/countries-emission.workflow";
 
 const app = express()
-
 app.use(bodyParser.json())
 
-app.get('/', async (req, res) => {    
+
+
+app.get('/', async (req, res) => {
   const countries = await footprintApi.getCountries()
-  const country = await footprintApi.getDataForCountry(229)
+  const country = await footprintApi.getDataForCountry(83)
 
   res.send(`
-    <center>
+    <div style="text-align: center;">
       <h1>Welcome to Altruistiq!</h1>
       <div style="display: flex; flex-direction: row;">
         <div style="width: 50%; margin-right: 20px;">    
@@ -35,16 +37,14 @@ app.get('/', async (req, res) => {
           >${JSON.stringify(country?.slice(0, 5), null, 2)}</pre>
         </div>
       </div>
-    </center>    
+    </div>    
   `)
-
-
-  console.log('showing first 5 countries:')
-  console.log(countries.slice(0, 5))
-  console.log('showing first 5 years of a country:')
-  console.log(country.slice(0, 5))
 })
 
-app.listen(5000,() => {     
+app.get('/countries-emission', countriesEmissionWorkflow)
+
+app.listen(5000,() => {
   console.log('app is listening on port 5000')
 })
+
+
